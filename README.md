@@ -287,11 +287,8 @@ We optimise over the following classification models using Bayesian optimization
 
 <div align="center">
 
-<!--  '1 home.png'          '11 faq.png'      '3 target selection.png'   '5 corr and mi.png'   '7 bayes.png'     '9 dashboard.png'
- '10 learn more.png'   '2 options.png'   '4 feature charts.png'     '6 pairplot.png'      '8 chatbot.png'   -->
-
 ![Landing Page](./screenshots/1%20home.png)
-Figure 1: Home Page
+Figure 1: Landing Page
 <br>
 
 ![Configurable Options](./screenshots/2%20options.png)
