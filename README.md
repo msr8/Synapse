@@ -71,7 +71,6 @@ Based on the provided codebase, here are 5 points summarizing the project in you
    - **Scikit-Learn:** Used for standard algorithms (SVM, KNN, Random Forest, etc.) and metrics
    - **Scikit-Optimize (skopt):** Powers the Bayesian Optimization engine for hyperparameter tuning
    - **XGBoost & LightGBM:** Advanced gradient boosting frameworks integrated into the pipeline
-   - **Pandas & NumPy:** Used for data manipulation and matrix operations
 3) **Visualization**
    - **Matplotlib & Seaborn:** Generates static charts like correlation heatmaps and pairplots (rendered to Base64)
    - **Pygal:** Used for interactive vector-based (SVG) visualizations
