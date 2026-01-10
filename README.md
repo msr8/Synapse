@@ -106,7 +106,7 @@ python app.py
 The application will be accessible at `http://127.0.0.1:5000` in your web browser
 
 > [!WARNING]
-> These instructions are intended for local development only. For production deployment, use a production-ready server like [Gunicorn](https://gunicorn.org/) or [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/), and consider using a reverse proxy like [Nginx](https://www.nginx.com/)
+> These instructions are intended for local deployment only. For production deployment, use a production-ready server like [Gunicorn](https://gunicorn.org/) or [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/), and consider using a reverse proxy like [Nginx](https://www.nginx.com/)
 
 
 
