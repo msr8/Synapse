@@ -106,7 +106,7 @@ python app.py
 
 The application will be accessible at `http://127.0.0.1:5000` in your web browser
 
-> !{WARNING}
+> ![WARNING]
 > These instructions are intended for local development only. For production deployment, use a production-ready server like [Gunicorn](https://gunicorn.org/) or [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/), and consider using a reverse proxy like [Nginx](https://www.nginx.com/)
 
 
@@ -145,7 +145,7 @@ The application will be accessible at `http://127.0.0.1:5000` in your web browse
 
 
 
-# Search Space for Classification Models
+# Search Space
 
 We optimise over the following classification models using Bayesian optimization to find the best model and hyperparameters for a given dataset:
 
@@ -284,33 +284,43 @@ We optimise over the following classification models using Bayesian optimization
 
 ![Landing Page](./screenshots/1%20home.png)
 Figure 1: Home Page
+<br>
 
 ![Configurable Options](./screenshots/2%20options.png)
 Figure 2: Configurable Options for EDA, Preprocessing, and Bayesian Optimization
+<br>
 
 ![Target Selection](./screenshots/3%20target%20selection.png)
 Figure 3: Target Column Selection
+<br>
 
 ![Feature Charts](./screenshots/4%20feature%20charts.png)
 Figure 4: Feature Columns Distributions
+<br>
 
 ![Correlation and Mutual Info](./screenshots/5%20corr%20and%20mi.png)
 Figure 5: Correlation Heatmap and Mutual Information Heatmap
+<br>
 
 ![Pairplot](./screenshots/6%20pairplot.png)
 Figure 6: Pairplot Visualization
+<br>
 
 ![Bayesian Optimization](./screenshots/7%20bayes.png)
 Figure 7: Real-time Logs Bayesian Optimization Results
+<br>
 
 ![Chatbot Interface](./screenshots/8%20chatbot.png)
 Figure 8: Chatbot Interface
+<br>
 
 ![Dashboard](./screenshots/9%20dashboard.png)
 Figure 9: User Dashboard
+<br>
 
 ![Learn More Page](./screenshots/10%20learn%20more.png)
 Figure 10: Learn More Page
+<br>
 
 ![FAQ Page](./screenshots/11%20faq.png)
 Figure 11: FAQs
