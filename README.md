@@ -100,7 +100,7 @@ cd synapse/src
 # Install the required dependencies
 pip install -r requirements.txt
 # Run the flask application
-python app.py
+python run.py
 ```
 
 The application will be accessible at `http://127.0.0.1:5000` in your web browser
