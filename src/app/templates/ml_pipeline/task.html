@@ -1,0 +1,335 @@
+{% extends "base.html" %}
+
+{% block title %}{{ task.name }}{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='ml_pipeline/task.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='ml_pipeline/chatbot.css') }}">
+    <script src="{{ url_for('static', filename='ml_pipeline/task.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='ml_pipeline/preprocessing.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='ml_pipeline/bayesian.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='ml_pipeline/chatbot.js') }}" defer></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- For downloading charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>    
+{% endblock %}
+
+
+
+
+
+
+{% block content %}
+  <span id="task-id" style="display:none;">{{ task.task_id }}</span>
+  <div class="head-container">
+    <div class="task-title-container">
+    <h1 id="task-name-span">{{ task.name }}</h1>
+    <button class="edit-button" onclick="changeTaskname()">
+      <svg class="edit-svgIcon" viewBox="0 0 512 512">
+                        <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+                      </svg>
+    </button>
+    <button class="setting-btn" onclick="toggleSettings()">
+      <span class="bar bar1"></span>
+      <span class="bar bar2"></span>
+      <span class="bar bar1"></span>
+    </button>
+    <button class="delete-button" onclick="deleteTask()">
+    <svg class="trash-svg" viewBox="0 -10 64 74" xmlns="http://www.w3.org/2000/svg">
+    <g id="trash-can">
+      <rect x="16" y="24" width="32" height="30" rx="3" ry="3" fill="#008b7b"></rect>
+
+      <g transform-origin="12 18" id="lid-group">
+        <rect x="12" y="12" width="40" height="6" rx="2" ry="2" fill="#008b7b"></rect>
+        <rect x="26" y="8" width="12" height="4" rx="2" ry="2" fill="#008b7b"></rect>
+      </g>
+    </g>
+    </svg>
+    </button>
+    </div>
+
+    <div class="tab-container">
+      <input type="radio" name="tab" id="tab1" class="tab tab--1" onclick="showNonChatbot()"/>
+        <label class="tab_label" for="tab1">Data Tools</label>
+
+      <input type="radio" name="tab" id="tab2" class="tab tab--2" onclick="initialiseChatbot()"/>
+        <label class="tab_label" for="tab2">Chatbot</label>
+
+      <div class="indicator"></div>
+
+        <!--<div onclick="showNonChatbot()" id="visual-button">Non-chatbot Thingz</div> | <div onclick="initialiseChatbot()" id="chatbot-button">Chatbot :3</div> -->
+    </div>
+  </div>
+
+
+
+    <div id="non-chatbot-content">
+        <div id="settings-div" style="display:none;">
+            <p style="font-size:20px; font-weight: 600;">Visualisation Settings:</p>
+            n_unique_threshold: <input type="number" id="n-unique-threshold-input" value="10" min="1" max="100"><br>
+            Confusion matrix labels:
+                <input type="radio" name="cm-normalize" value="none" checked> Raw Counts
+                <input type="radio" name="cm-normalize" value="true" > Normalize each row
+                <input type="radio" name="cm-normalize" value="pred" > Normalize each column
+                <input type="radio" name="cm-normalize" value="all"  > Normalize all
+            <br>
+            
+            <br>
+
+            <p style="font-size:20px; font-weight: 600;">Preprocessing Settings:</p>
+            Scaler:
+                <input type="radio" name="scaler" value="standard" checked> Standard
+                <input type="radio" name="scaler" value="minmax"          > MinMax
+                <input type="radio" name="scaler" value="robust"          > Robust
+                <input type="radio" name="scaler" value="decimal"         > Decimal
+            <br>
+            Feature Selection Method:
+                <input type="radio" name="fs-method" value="corr+mi" checked> Mutual Information + Correlation
+                <input type="radio" name="fs-method" value="chi2"           > Chi2
+                <input type="radio" name="fs-method" value="anova"          > ANOVA
+            <br>
+            <div id="mi-corr-settings" class="inline-input-group">
+              <div class="inline-input-item">
+                <label>Mutual Information threshold:</label>
+                <input type="number" name="mi-threshold" value="0.1" min="0" max="1" step="0.01">
+              </div>
+              <div class="inline-input-item">
+                <label>Correlation Threshold</label>
+                <input type="number" name="corr-threshold" value="0.8" min="0" max="1" step="0.01">
+              </div>
+            </div>
+            <div class="inline-input-item" id="n-features-span">
+                <label for="n-features">Number of features:</label>
+                <input type="number" name="n-features" id="n-features" value="8" min="1" max="100" step="1">
+              </div>
+            <br>
+            <p style="font-size:20px; font-weight: 600; margin-bottom: 0.5rem;">Bayesian Optimisation Settings:</p>
+            <div id="bayesian-settings" class="inline-input-group">
+              <div class="inline-input-item">
+                <label>Number of Cross-Validation Folds:</label>
+                <input type="number" name="cv" value="3" min="1" max="100" step="1">
+              </div>
+              <div class="inline-input-item">
+                <label>Test Size Ratio:</label>
+                <input type="number" name="test-size-ratio" value="0.2" min="0" max="1"   step="0.01">
+                <input type="checkbox" name="stratify" value="true" checked> Stratify the testing dataset <br>           
+              </div>
+            </div>
+            <br>
+            <!--Number of Cross-Validation Folds: <input type="number" name="cv"              value="3"   min="1" max="100" step="1"><br>
+            Test Size Ratio:                  <input type="number" name="test-size-ratio" value="0.2" min="0" max="1"   step="0.01"><br>-->
+            
+            Scoring Method:
+                <input type="radio" name="scorer" value="accuracy"         > Accuracy
+                <input type="radio" name="scorer" value="precision_macro"  > Precision
+                <input type="radio" name="scorer" value="recall_macro"     > Recall
+                <input type="radio" name="scorer" value="f1_macro" checked > F1
+                <input type="radio" name="scorer" value="roc_auc_ovr"      > ROC AUC
+                <input type="radio" name="scorer" value="neg_log_loss"     > Neg Log Loss
+            <br>
+            Stopper:
+                <!-- n_iter stopper -->
+                <input type="radio" name="stopper" value="n_iter"> N Iter Stopper
+                <input type="radio" name="stopper" value="deadline" checked> Deadline Stopper
+                <input type="radio" name="stopper" value="threshold"> Threshold
+                <input type="radio" name="stopper" value="delta"> Delta Stopper
+                <br>
+                <div id="bayesian-settings" class="inline-input-group">
+                  <div class="inline-input-item" id="n-iter-span">
+                    <label for="n-iter-span">Number of iterations:</label>
+                    <input type="number" name="n-iter" value="10"   min="1" max="1000" step="1"> iterations
+                  </div>
+                  <div class="inline-input-item" id="deadline-time-span">
+                    <label for="deadline-time-span">Time:</label>
+                    <input type="number" name="deadline-time"   value="10"   min="1" max="1000" step="1"> seconds      
+                  </div>
+                  <div class="inline-input-item" id="threshold-value-span">
+                    <label for="threshold-value-span">Threshold:</label>
+                    <input type="number" name="threshold-value" value="0.9"  min="0" max="1" step="0.01">
+                  </div>
+                  <div class="inline-input-item" id="delta-value-span">
+                    <label for="delta-value-span">Delta Value:</label>
+                    <input type="number" name="delta-value"     value="0.01" min="0" max="1"    step="0.01">
+                  </div>
+                </div>
+                <br>
+        </div>
+
+
+        <div id="target-chooser" class="">
+          <br>
+            <h3>What is the target column?</h3>
+            {% set default_target = task.columns[-1] %}
+            {% for col in task.columns %}
+                <input type="radio" name="target" value="{{ col }}" id="{{ col }}" {% if col == default_target %}checked{% endif %}>
+                <label for="{{ col }}" style="font-size:20px;">{{ col }}</label>
+                <br>
+            {% endfor %}
+        </div>
+
+        <br><br><br>
+
+        <div id="eda-skip-chooser">
+            <button class="choice-button" onclick="eda()">Do EDA <div class="arrow-wrapper"><div class="arrow"></div></button>
+            <button class="choice-button" onclick="preprocess()">Jump to preprocessing <div class="arrow-wrapper"><div class="arrow"></div></div></button>
+        </div>
+
+
+        <div id="charts">
+            {% for i in range(task.columns |length) %}
+                <div id="chart-{{i}}-container" class="chart-container" style="display:none;">
+                </div>
+            {% endfor %}
+        </div>
+
+        <div id="preprocessing-charts" style="display:none;">
+            <div id="correlation-matrix-div" class="chart-container"></div>
+            <div id="mutual-info-div" class="chart-container"></div>
+            <div id="pairplot-div" class="chart-container" style="width:100%; max-width:100%"></div>
+        </div>
+
+        <div id="post-preprocessing-div">
+          <div style="display: flex; justify-content: center; padding-bottom: 50px;">
+            <span id="bayesian-choice-div" onclick="startBayesian()" class="bayesian-btn" style="display: none;">
+                Perform Bayesian Optimization
+            </span>
+
+            <div onclick="downloadCharts()" id="download-charts-div" class="download-btn" style="display: none;">Download charts</div>
+          </div>
+            <div id="bayesian-results-div" style="display: none;">
+              <h1 style="text-align: center; background: linear-gradient(135deg, #008677 , #6909a1); -webkit-background-clip: text; background-clip: text; color: transparent;">Bayesian Optimization Results</h1>
+              <br>
+              <div style="display:flex" class="bayesian-box">
+                  {% for model, model_dn in models_dns.items() %}
+                      <div id="{{model}}-container" class="model-container">
+                          <div class="model-name">{{model_dn}}</div>
+                          <div class="model-status" id="{{model}}-status">
+                              Iterations Done: <span id="{{model}}-n-iter">0</span><br>
+                              Current Best score: <span id="{{model}}-best-score">0</span>
+                          </div>
+                          <img id="{{model}}-confusion-matrix" class="model-confusion-matrix small-matrix">
+                      </div>
+                  {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+    <!-- Chatbot Content -->
+    <div id="chatbot-content" class="chatbot-container-1 tab-pane fade show active" role="tabpanel" aria-labelledby="chatbot-tab" style="display: none;">
+        <div id="chatbot-container-2">
+          <div id="chatbot-container-3">
+            <div class="alert alert-info text-center" id="chatbot-initialising" style="display: none;">
+              <div class="spinner-border spinner-border-sm me-2" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              Initializing AI assistant...
+            </div>
+            
+            <div id="chatbot-container-4" class="card shadow-lg">
+              <div id="chats-container" class="card-body p-3 chat-messages">
+                <div id="chatbot-placeholder" class="placeholder-text">
+                  Hi there! What can I help with?
+                </div>
+              </div>
+              <div class="card-footer">
+                <form onsubmit="chat(); return false;" class="chat-input-form">
+                  <div class="input-group">
+                    <input type="text" id="message-input" class="form-control" autocomplete="off" placeholder="Type your message here...">
+                    <button type="submit" id="send-button">
+                        <div class="svg-wrapper-1">
+                            <div class="svg-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="none" d="M0 0h24v24H0z"></path>
+                                <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z" ></path>
+                            </svg>
+                            </div>
+                        </div>
+                        <span>Send</span>
+                    </button>
+                    <button id="reset-chat-button" onclick="chatReset()" type="button" class="noselect">
+                        <span class='text'>Reset</span>
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg>
+                        </span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- <div id="chatbot-content" style="display:none;">
+        <span id="chatbot-initialising">Initialising chatbot...</span>
+
+        <div id="chats-container"></div>
+
+        <br><br>
+
+        <div class="chat-input">
+            <form onsubmit="chat(); return false;">
+                <input type="text" id="message-input" autocomplete="off" placeholder="Type your message here...">
+                <button id="send-button">
+                    <div class="svg-wrapper-1">
+                      <div class="svg-wrapper">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          width="24"
+                          height="24"
+                        >
+                          <path fill="none" d="M0 0h24v24H0z"></path>
+                          <path
+                            fill="currentColor"
+                            d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                          ></path>
+                        </svg>
+                      </div>
+                    </div>
+                    <span>Send</span>
+                  </button>
+                  
+                <button id="reset-chat-button" onclick="chatReset()" type="button">Reset Chat</button>
+            </form>
+        </div>
+    </div> -->
+    
+{% endblock %}
+
+
+
+
+
+
+{% block end_script %}
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+    gsap.to(".content-container", {
+        opacity: 1, 
+        y: 0, 
+        duration: 10,
+        ease: "power2.out"
+    });
+    </script> -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
+    <script>
+        const { animate, scroll } = Motion
+    </script>
+{% endblock %}

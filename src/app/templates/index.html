@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Synapse | AI-Driven Data Insights{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <script src="{{ url_for('static', filename='index.js') }}" defer></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="hero-container">
+   
+    
+    <div class="content-wrapper">
+        <div class="logo-container">
+            <div class="logo">
+                <span class="typewriter">Synapse</span>
+            </div>
+        </div>
+        
+        <div class="hero-content">
+            <h1 class="main-quote">Empowering users with AI-driven data insights</h1>
+            <p class="sub-quote">Effortlessly explore, preprocess, and discover the best machine learning models through a conversational interface</p>
+            
+            <a href="/learn-more">
+                <button class="learn-more-btn">
+                    <span class="btn-text">Learn More</span>
+                    <span class="btn-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </span>
+                </button>
+            </a>
+        </div>
+        
+        <div class="upload-section">
+            <div class="upload-container">
+                <div class="upload-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                </div>
+                <div class="upload-text">
+                    <span>Upload your CSV file</span>
+                    <span class="upload-subtext">or drag and drop here</span>
+                </div>
+                <input type="file" id="file-input" name="file" accept=".csv" class="file-input" onchange="uploadFile()">
+            </div>
+            <div class="upload-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="file-info">
+                    <span class="file-name"></span>
+                    <span class="file-size"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="features-preview">
+        <div class="feature">
+            <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+            </div>
+            <h3>Data Analysis</h3>
+            <p>Instant insights from your data</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                </svg>
+            </div>
+            <h3>Model Selection</h3>
+            <p>Automated ML model discovery</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+            </div>
+            <h3>AI Assistant</h3>
+            <p>Conversational guidance</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+

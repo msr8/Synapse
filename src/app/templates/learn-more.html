@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block title %}Learn More{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='learn-more.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <header class="header">
+        <h1>All about Synapse</h1>
+    </header>
+
+    <!-- How it works section -->
+    <section class="how-it-works">
+        <h2 style="text-align: center; color: #4a3b8b; margin-bottom: 1rem;">How It Works</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto;">Our platform simplifies the data analysis
+            process into three easy steps:</p>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Upload Your Data</h3>
+                <p>Simply upload your CSV files to our platform. We support datasets of all sizes.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Exploratory Data Analysis</h3>
+                <p>Our platform automatically analyzes your dataset with visualizations like correlation matrices,
+                    mutual information heatmaps, pairplots, and feature-wise charts.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Automated Processing</h3>
+                <p>Our platform automatically cleans, normalizes, and prepares your data for analysis, transforming it
+                    into an optimized format for real world use.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3 class="step-title">Bayesian Optimisation</h3>
+                <p>Our platform efficiently fine-tunes machine learning models by automatically searching for the best
+                    hyperparameters, ensuring optimal performance.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <h3 class="step-title">Chat with the data</h3>
+                <p>Use our conversational interface to ask questions about your data and receive accurate answers and
+                    insights instantly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use cases section -->
+    <section class="use-cases">
+        <h2 style="text-align: center; color: #4a3b8b; margin-bottom: 2rem;">Real-World Applications</h2>
+
+        <div class="case-cards">
+            <div class="case-card">
+                <h3 class="case-title">Customer Churn Prediction</h3>
+                <p style="text-align: justify;">A telecom company used our platform to automatically prepare and
+                    analyze customer data, identifying key features causing churn and optimizing models to predict
+                    at-risk customers with high accuracy.</p>
+                <div class="case-result">                    <p><strong>Result:</strong> 19% increase in customer
+                    retention rates.</p></div>
+
+            </div>
+
+            <div class="case-card">
+                <h3 class="case-title">Fraud Detection</h3>
+                <p style="text-align: justify;">A financial services firm analyzed millions of transactions to
+                    detect fraud patterns. Our platform streamlined EDA, preprocessing, and model selection, finding
+                    highly accurate classifiers for real-time detection.</p>
+                <div class="case-result">                    <p><strong>Result:</strong> 27% faster fraud
+                    identification with 10% fewer false positives.</p></div>
+
+            </div>
+
+            <div class="case-card">
+                <h3 class="case-title">Medical Diagnosis Support</h3>
+                <p style="text-align: justify;">A hospital used Synapse to classify diagnostic data from
+                    lab tests. Automated feature selection and optimization helped surface hidden indicators of rare
+                    diseases that manual analysis missed.</p>
+                <div class="case-result"><p><strong>Result:</strong> 18% improvement in early
+                    disease detection rates.</p></div>
+            </div>
+
+            <div class="case-card">
+                <h3 class="case-title">Marketing Campaign Targeting</h3>
+                <p style="text-align: justify;">An e-commerce brand leveraged our platform to classify customer
+                    profiles for campaign targeting. Data was cleaned, scaled, and optimized automatically, leading
+                    to more precise audience segmentation.</p>
+                <div class="case-result">                    <p><strong>Result:</strong> 22% increase in campaign
+                    conversion rates.</p></div>
+
+            </div>
+        </div>
+    </section>
+
+<!-- FAQ section -->
+<section class="faq">
+    <h2 style="text-align: center; color: #4a3b8b; margin-bottom: 2rem;">Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+        <div class="faq-question">Do I need to know programming to use Synapse?</div>
+        <div class="faq-answer">Not at all! Our platform is designed for users of all technical levels. The
+            conversational interface allows you to interact with your data using natural language. For advanced users,
+            we also offer Python and R integration.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">How do I customize the analysis steps?</div>
+        <div class="faq-answer">You can customize every step of the analysis, from EDA to preprocessing and Bayesian
+            optimization, including but not limited to feature selection methods, scaling techniques, test size ratio,
+            scoring metrics, stopper types, and confusion matrix configurations.</div>
+
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">What kind of visualizations are available in the EDA step?</div>
+        <div class="faq-answer">We provide a range of visualizations including correlation matrices, mutual information
+            heatmaps, pairplots, histograms, and pie charts, helping you explore your data in depth and uncover insights
+            quickly.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">How does Bayesian optimization improve my models?</div>
+        <div class="faq-answer">Bayesian optimization helps fine-tune model hyperparameters to achieve the best
+            performance. It uses a probabilistic model to intelligently search for the optimal settings, saving time and
+            improving accuracy.</div>
+    </div>
+
+    <!-- <div class="faq-item">
+                <div class="faq-question">How accurate are the AI-generated insights?</div>
+                <div class="faq-answer">Our AI models are trained on diverse datasets and continuously improved. For statistical analyses, we provide confidence intervals and p-values. The platform also clearly distinguishes between factual observations and predictive insights.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Can I export the results and visualizations?</div>
+                <div class="faq-answer">Yes! All insights, visualizations, and processed data can be exported in multiple formats including PDF, Excel, CSV, and interactive HTML. You can also schedule automated reports to be delivered via email.</div> -->
+    </div>
+</section>
+</div>
+{% endblock%}

@@ -1,0 +1,93 @@
+html {
+    /* background: linear-gradient(to bottom, #2d1b36 0%, #0a050a 100%); */
+    background: linear-gradient(to bottom, #b2f7ef 0%, #dec5e3 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /* background: linear-gradient(to bottom, #26192a 0%, #0a0a0a 100%); */
+
+    height: 100%;
+}
+
+
+body {
+    background: transparent;
+    /*color: #eee;*/
+    font-family: Satoshi;
+
+    /* Removing but simulating the default 8px margin on body that most browsers have */
+    margin: 0;
+    padding: var(--body-padding);
+    /* Making the body take up all veiw space */
+    height: calc(100% - var(--body-padding)*2 );
+    /* Making it so that #content-container can take up all space except navbar */
+    display: flex;
+    flex-direction: column;
+}
+
+
+:root {
+    --body-padding: 8px;
+    
+    --primary-color-1: #da69ff34;
+    --text-color: linear-gradient(270deg, #d283eb, #a367b6);
+    --text-color:  #ddd;
+    --text-color-1: #d283eb;
+    --text-color-2: #a367b6;
+
+    --button-1-background-color: #da69ff34;
+    --button-1-border-color: #9c4fb880;
+    --button-1-text-color: #fafafa;
+    --button-1-background-color-hover: #7e2c8b88;
+    --button-1-border-color-hover: #7e2c8b9c;
+
+    --button-2-background-color: #7e2c8b88;
+    --button-2-border-color: #7e2c8b9c;
+    --button-2-text-color: #fafafa;
+    --button-2-background-color-hover: #7e2c8b63;
+    --button-2-border-color-hover: #7e2c8b8c;
+
+    --button-3-background-color: #101010;
+    --button-3-border-color: #151515;
+    --button-3-text-color: #eee;
+    --button-3-background-color-hover: #da69ff46;
+    --button-3-border-color-hover: #da69ff46;
+}
+
+
+.button {
+    padding: 10px;
+    border: 2px solid;
+    border-radius: 10px;
+    transition: 0.4s;
+}
+
+.button-1 {
+    background-color: var(--button-1-background-color);
+    color: var(--button-1-text-color);
+    border-color: var(--button-1-border-color);
+}
+.button-1:hover {
+    background-color: var(--button-1-background-color-hover);
+    border-color: var(--button-1-background-color-hover);
+}
+
+
+.button-2 {
+    background-color: var(--button-2-background-color);
+    color: var(--button-2-text-color);
+    border-color: var(--button-2-border-color);
+}
+.button-2:hover {
+    background-color: var(--button-2-background-color-hover);
+    border-color: var(--button-2-background-color-hover);
+}
+
+.button-3 {
+    background-color: var(--button-3-background-color);
+    color: var(--button-3-text-color);
+    border-color: var(--button-3-border-color);
+}
+.button-3:hover {
+    background-color: var(--button-3-background-color-hover);
+    border-color: var(--button-3-background-color-hover);
+}

@@ -1,0 +1,57 @@
+
+:root {
+    --color-blue-500: oklch(0.623 0.214 259.815);
+    --color-blue-600: oklch(0.546 0.245 262.881);
+    --font-weight-medium: 500;
+}
+
+.btns {
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+    border: none;
+    background: none;
+    font-weight: 600;
+  }
+
+.btns a {
+    color: #0f4cad;
+    text-decoration: none;
+    font-family: 'Satoshi', sans-serif;
+  }
+  
+.btns::before {
+    margin-left: auto;
+  }
+  
+.btns::after, .btns::before {
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #25d4c0;
+    display: block;
+    transition: 0.5s;
+  }
+  
+.btns:hover::after, .btns:hover::before {
+    width: 100%;
+  }
+
+#navbar {
+    display: flex;
+    font-family: 'Inter', sans-serif;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+/* Making it so that #content-container can take up all space except navbar */
+#content-container {
+    flex: 1;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 0.5rem;
+}
+
