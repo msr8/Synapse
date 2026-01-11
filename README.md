@@ -39,11 +39,11 @@
 
 ### Features
 
-1) Engineered a **full-stack real-time ML platform** enabling seamless dataset upload, processing, and model hyperparameter finetuning
-2) Integrated **Bayesian Optimization** to autonomously tune hyperparameters for diverse models like **LightGBM, SVM, and Random Forest**
-3) Implemented an **automated EDA pipeline** generating insightful and interactive visualizations including correlation matrices, mutual information heatmaps, and pairplots
-4) Developed a **robust customisable preprocessing engine** with intelligent missing value handling, encoding, feature selection, and scaling
-5) Embedded a **Generative AI chatbot** to provide interactive, data-driven insights and statistical interpretations to both, technical and non-technical users
+1) Engineered a **full-stack real-time ML platform** enabling the automation of ML workflows
+2) Integrated **Bayesian Optimization** to autonomously tune hyperparameters for diverse models
+3) Implemented an **automated EDA pipeline** generating insightful and interactive visualizations
+4) Developed a **robust customisable preprocessing engine** with intelligent missing value handling, feature selection, and scaling
+5) Embedded an **AI chatbot** to provide data-driven insights and statistical interpretations for technical and non-technical users
 
 <!-- 
 Based on the provided codebase, here are 5 points summarizing the project in your requested style:
