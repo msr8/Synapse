@@ -102,7 +102,7 @@ Based on the provided codebase, here are 5 points summarizing the project in you
 To run the application locally, follow these steps:
 
 First of all, ensure that you have [git](https://git-scm.com/) and [Python 3.8+](https://www.python.org/downloads/) installed on your machine. Then, run the following commands:
-```bash
+```sh
 # Clone the repository
 git clone https://github.com/msr8/synapse
 cd synapse/src
@@ -312,7 +312,7 @@ Figure 6: Pairplot Visualization
 <br>
 
 ![Bayesian Optimization](./screenshots/7%20bayes.png)
-Figure 7: Real-time Logs Bayesian Optimization Results
+Figure 7: Real-time Bayesian Optimization Results
 <br>
 
 ![Chatbot Interface](./screenshots/8%20chatbot.png)
